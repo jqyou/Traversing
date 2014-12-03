@@ -20,7 +20,7 @@ public class Register extends Activity{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(Register.this, Homepage.class);
+				intent.setClass(Register.this, SXX.class);
 				Register.this.startActivity(intent);
 			}
 
