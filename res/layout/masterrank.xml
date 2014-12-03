@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beijingtu" >
+    
+     <TextView
+        android:id="@+id/title_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/gpa"
+        android:textColor="#ffffff"
+        android:textSize="23sp" />
+
+    <EditText
+        android:id="@+id/content_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title_gpa"
+        android:layout_toRightOf="@+id/title_gpa"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+    
+    <TextView
+        android:id="@+id/title_toefl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_gpa"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/toefl"
+        android:textColor="#ffffff"
+        android:textSize="23sp" />
+
+    <EditText
+        android:id="@+id/content_toefl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title_toefl"
+        android:layout_toRightOf="@+id/title_toefl"
+        android:ems="10"
+        android:inputType="number" />
+    
+    <TextView
+        android:id="@+id/title_ielts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_toefl"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/ielts"
+        android:textColor="#ffffff"
+        android:textSize="23sp" />
+
+    <EditText
+        android:id="@+id/content_ielts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title_ielts"
+        android:layout_toRightOf="@+id/title_ielts"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+    
+    <TextView
+        android:id="@+id/title_gre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_ielts"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/gre"
+        android:textColor="#ffffff"
+        android:textSize="23sp" />
+
+    <EditText
+        android:id="@+id/content_gre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title_gre"
+        android:layout_toRightOf="@+id/title_gre"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/content_toefl"
+        android:text="@string/assessbutton" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/title_gre"
+        android:layout_below="@+id/title_gre" >
+
+    </ListView>
+    
+</RelativeLayout>
