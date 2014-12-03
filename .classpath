@@ -5,8 +5,14 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="lib" path="/Users/Wheat/Documents/workspace/appcompat_v7/bin/appcompat_v7.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/Wheat/Documents/workspace/appcompat_v7/libs/android-support-v4.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/Wheat/Documents/workspace/appcompat_v7/libs/android-support-v7-appcompat.jar"/>
+=======
+	<classpathentry exported="true" kind="lib" path="/Users/Daisy/Documents/workspace/appcompat_v7/bin/appcompat_v7.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Daisy/Documents/workspace/appcompat_v7/libs/android-support-v4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Daisy/Documents/workspace/appcompat_v7/libs/android-support-v7-appcompat.jar"/>
+>>>>>>> 0b0d7b66f9a45479498a4144d988d0f51a9b8ef3
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
