@@ -103,8 +103,6 @@ public class Visitorassess extends Activity {
 				EditText gre = (EditText) findViewById(R.id.content_gre);
 				GRE = gre.getText().toString();
 			
-			
-
 				country = spinner1.getSelectedItem().toString();
 				type = spinner2.getSelectedItem().toString();
 				majors = spinner3.getSelectedItem().toString();
