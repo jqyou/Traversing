@@ -39,6 +39,7 @@
         android:layout_below="@+id/button_assess"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
+        android:textColor="#000000"
         android:layout_marginLeft="60dp" >
     </ListView>
 

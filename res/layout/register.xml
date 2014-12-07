@@ -25,59 +25,6 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_marginBottom="12dp"
-        android:text="@string/major"
-        android:textColor="#ffffff"
-        android:textSize="23sp" />
-
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="35dp"
-        android:layout_toRightOf="@+id/textView8" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinner3"
-        android:layout_toLeftOf="@+id/textView1"
-        android:text="@string/masterphd"
-        android:textColor="#ffffff"
-        android:textSize="23sp" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView8"
-        android:layout_toRightOf="@+id/textView6" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinner2"
-        android:layout_alignLeft="@+id/textView7"
-        android:text="@string/targetcountry"
-        android:textColor="#ffffff"
-        android:textSize="22sp" />
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_alignLeft="@+id/spinner2" />
-
-    <TextView
         android:id="@+id/textViewgpa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +32,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="35dp"
         android:text="@string/nameregister"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="25sp" />
 
     <EditText
@@ -117,7 +64,7 @@
         android:layout_below="@+id/editText4"
         android:layout_marginTop="20dp"
         android:text="@string/emailregister"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="25sp" />
 
     <EditText
@@ -141,7 +88,7 @@
         android:layout_alignBottom="@+id/editTextpassword"
         android:layout_alignParentLeft="true"
         android:text="@string/passwordregister"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="25sp" />
 
 </RelativeLayout>

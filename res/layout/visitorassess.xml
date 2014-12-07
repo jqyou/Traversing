@@ -25,7 +25,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/gpa"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -45,7 +45,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/toefl"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -65,7 +65,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/ielts"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -85,7 +85,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/gre"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -105,7 +105,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/targetcountry"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <Spinner
@@ -123,7 +123,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/masterphd"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <Spinner
@@ -141,7 +141,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/major"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <Spinner

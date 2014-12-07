@@ -11,7 +11,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/gpa"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -31,7 +31,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/toefl"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -51,7 +51,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/ielts"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -71,7 +71,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/gre"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="23sp" />
 
     <EditText
@@ -97,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
         android:layout_alignLeft="@+id/title_gre"
+        android:textColor="#000000"
         android:layout_below="@+id/title_gre" >
 
     </ListView>
