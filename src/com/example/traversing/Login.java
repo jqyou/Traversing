@@ -31,9 +31,6 @@ public class Login extends Activity {
 	private JSONArray record;
 //	private Storage storage;
 
-	// products JSONArray
-	// JSONArray result = null;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
