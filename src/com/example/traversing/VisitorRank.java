@@ -24,14 +24,15 @@ public class VisitorRank extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rankvisitor);
+		MyApplication.getInstance().addActivity(this);
 
 		Intent intent = getIntent();
-		String result = intent.getStringExtra(Visitorassess.EXTRA_MESSAGE);//½ÓÏÂÀ´string
+		String result = intent.getStringExtra(Visitorassess.EXTRA_MESSAGE);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½string
 
 		try {
 			rank = new JSONArray(result);
 
-			adapter = new SimpleAdapter(VisitorRank.this, getData(),//µ÷ÓÃÏÂÃæµÄgetdataº¯Êý
+			adapter = new SimpleAdapter(VisitorRank.this, getData(),//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½getdataï¿½ï¿½ï¿½ï¿½
 					R.layout.listitem_name, new String[] { "name" },
 					new int[] { R.id.names });
 			ListView result_list = (ListView) findViewById(R.id.list_name);
@@ -58,7 +59,7 @@ public class VisitorRank extends Activity {
 			Hashtable<String, Object> table = new Hashtable<String, Object>();
 
 			try {
-				table.put("name", rank.getJSONObject(i).getString("Name"));//µÚÒ»¸önameÊÇlistviewÖÐµÄkey£­value½á¹¹ µÚ¶þ¸önameÊÇjsonobjectÖÐµÄname
+				table.put("name", rank.getJSONObject(i).getString("Name"));//ï¿½ï¿½Ò»ï¿½ï¿½nameï¿½ï¿½listviewï¿½Ðµï¿½keyï¿½ï¿½valueï¿½á¹¹ ï¿½Ú¶ï¿½ï¿½ï¿½nameï¿½ï¿½jsonobjectï¿½Ðµï¿½name
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

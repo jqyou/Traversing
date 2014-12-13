@@ -2,7 +2,7 @@ package com.example.traversing;
 import android.app.Application;  
 
 public class NameStore extends Application{
-	private String username;  
+	private String username="";  
     
     public String getText(){  
         return this.username;  

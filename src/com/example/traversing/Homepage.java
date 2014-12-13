@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -22,6 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Homepage extends Activity {
+	
+	private NameStore usernamestore;//è®¾ç½®å…¨å±€å˜é‡æ¥æŸ¥çœ‹æ˜¯å¦æœ‰ç”¨æˆ·ç™»é™†
+	private String username;
 
 	// private SimpleAdapter adapter;
 	private List<Hashtable<String, Object>> data;
@@ -45,52 +50,109 @@ public class Homepage extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-
-		Button button1 = (Button) findViewById(R.id.button_register);
-		button1.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(Homepage.this, Register.class);
-				Homepage.this.startActivity(intent);
-			}
-
-		});
-
-		Button button2 = (Button) findViewById(R.id.button_login);
-		button2.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(Homepage.this, Login.class);
-				Homepage.this.startActivity(intent);
-			}
-
-		});
-
-		// set OnClick for VisitorAssess
+		MyApplication.getInstance().addActivity(this);
+		
+		usernamestore = (NameStore) getApplication();
+	    username=usernamestore.getText();
+	    Button button1 = (Button) findViewById(R.id.button_register);
+	    Button button2 = (Button) findViewById(R.id.button_login);
 		Button assess = (Button) findViewById(R.id.button_assess);
-		assess.setOnClickListener(new OnClickListener() {
+		Button exit = (Button) findViewById(R.id.button_exit);
+		TextView user_name = (TextView) findViewById(R.id.textView1);
+	    if(username.equals("")){
+	    	
+			button1.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(Homepage.this, Register.class);
+					Homepage.this.startActivity(intent);
+				}
+
+			});
+
+			
+			button2.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(Homepage.this, Login.class);
+					Homepage.this.startActivity(intent);
+				}
+
+			});
+
+			// set OnClick for VisitorAssess
+		
+			assess.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent visitor_assess = new Intent(Homepage.this,
+							Visitorassess.class);
+					Homepage.this.startActivity(visitor_assess);
+				}
+
+			});
+			user_name.setVisibility(View.INVISIBLE);
+			exit.setVisibility(View.INVISIBLE);
+			
+	    }
+	    else
+	    {
+	    	button1.setVisibility(View.INVISIBLE);
+	    	button2.setVisibility(View.INVISIBLE);
+	    	//assess.setVisibility(View.INVISIBLE);
+	    	// set OnClick for VisitorAssess
+			
+			assess.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent visitor_assess = new Intent(Homepage.this,
+								SXX.class);
+						Homepage.this.startActivity(visitor_assess);
+					}
+
+				});
+	    
+			user_name.setText(username);
+	    }
+		
+	    exit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent visitor_assess = new Intent(Homepage.this,
-						Visitorassess.class);
-				Homepage.this.startActivity(visitor_assess);
+			
+				MyApplication.getInstance().exit();
 			}
 
 		});
+		
+		
+		
+	
+			
+	
+			ListView result_list = (ListView) findViewById(R.id.list_news);
+			data = getData();
+			MyAdapter adapter = new MyAdapter(this);
+			result_list.setAdapter(adapter);
+			result_list.setOnItemClickListener(listener);
+			
+	
+		
+		
+	
+		
 
-		ListView result_list = (ListView) findViewById(R.id.list_news);
-		data = getData();
-		MyAdapter adapter = new MyAdapter(this);
-		result_list.setAdapter(adapter);
-		result_list.setOnItemClickListener(listener);
+
 	}
+	
 
-	// ÊµÏÖitemµÄµã»÷
+	// Êµï¿½ï¿½itemï¿½Äµï¿½ï¿½
 	public OnItemClickListener listener = new OnItemClickListener() {
 
 		@Override
@@ -102,7 +164,7 @@ public class Homepage extends Activity {
 		}
 	};
 
-	// ²úÉú¡¶¡·½á¹¹
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹
 	private List<Hashtable<String, Object>> getData() {
 		List<Hashtable<String, Object>> list = new ArrayList<Hashtable<String, Object>>();
 		for (int i = 0; i < news.length; i++) {
@@ -114,7 +176,7 @@ public class Homepage extends Activity {
 		return list;
 	}
 
-	// ÊµÏÖbuttonµÄµã»÷
+	// Êµï¿½ï¿½buttonï¿½Äµï¿½ï¿½
 	public final class ViewHolder {
 		public TextView news;
 		public ImageButton button;
@@ -137,6 +199,7 @@ public class Homepage extends Activity {
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
 			return null;
+		
 		}
 
 		@Override

@@ -12,7 +12,7 @@ public class RankUser extends Activity {
 	private NameStore usernamestore;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		MyApplication.getInstance().addActivity(this);
 		setContentView(R.layout.rankfinally);
 		usernamestore = (NameStore) getApplication();
 		TextView user_name = (TextView) findViewById(R.id.textView1);

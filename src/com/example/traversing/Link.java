@@ -15,6 +15,7 @@ public class Link extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.link);
+		MyApplication.getInstance().addActivity(this);
 		
 		Button button1 = (Button) findViewById(R.id.button_return);
 		button1.setOnClickListener(new OnClickListener() {
@@ -34,17 +35,17 @@ public class Link extends Activity{
 
 	spinner = (Spinner) findViewById(R.id.spinner_major);
 
-	// ½«¿ÉÑ¡ÄÚÈİÓëArrayAdapterÁ¬½ÓÆğÀ´
+	// ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ArrayAdapterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	adapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_spinner_item, major);
 
-	// ÉèÖÃÏÂÀ­ÁĞ±íµÄ·ç¸ñ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Ä·ï¿½ï¿½
 	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-	// ½«adapter Ìí¼Óµ½spinnerÖĞ
+	// ï¿½ï¿½adapter ï¿½ï¿½Óµï¿½spinnerï¿½ï¿½
 	spinner.setAdapter(adapter);
 	
-	// ÉèÖÃÄ¬ÈÏÖµ
+	// ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ
 	spinner.setVisibility(View.VISIBLE);
 
 }

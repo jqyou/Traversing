@@ -35,6 +35,8 @@ public class Register extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		MyApplication.getInstance().addActivity(this);
 
 		setContentView(R.layout.register);
 

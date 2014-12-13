@@ -36,11 +36,12 @@ public class Masterrank extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.masterrank);
+		MyApplication.getInstance().addActivity(this);
 
-		// // set content for listView getdataÊÇÏÂÃæµÄ½á¹¹
+		// // set content for listView getdataï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½á¹¹
 		// adapter = new SimpleAdapter(Masterrank.this, getData(),
 		// R.layout.listitem_assess, new String[] { "options" },
-		// new int[] { R.id.options });// Ò»ÐÐÖÐÓÐÒ»¸ötextview news
+		// new int[] { R.id.options });// Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½textview news
 		// ListView result_list = (ListView) findViewById(R.id.list_news);
 		// result_list.setAdapter(adapter);
 
@@ -84,7 +85,7 @@ public class Masterrank extends Activity {
 		}
 	};
 
-	// ²úÉú¡¶¡·½á¹¹
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹
 	private List<Hashtable<String, Object>> getData() {
 		List<Hashtable<String, Object>> list = new ArrayList<Hashtable<String, Object>>();
 		for (int i = 0; i < options.length; i++) {

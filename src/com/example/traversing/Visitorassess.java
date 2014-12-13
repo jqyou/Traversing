@@ -40,6 +40,7 @@ public class Visitorassess extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.visitorassess);
+		MyApplication.getInstance().addActivity(this);
 
 		String[] target = { "USA", "UK", "HK&Macau", "Australia", "Singapore" };
 		String[] master = { "Master", "PHD" };

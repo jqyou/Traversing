@@ -34,7 +34,9 @@ public class Login extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+        
+		MyApplication.getInstance().addActivity(this);
+		
 		setContentView(R.layout.login);
 
 		Button button1 = (Button) findViewById(R.id.button1);
@@ -95,9 +97,10 @@ public class Login extends Activity {
 				} else {
 					Toast.makeText(getApplicationContext(), "Login success!",
 							Toast.LENGTH_SHORT).show();
+				
 					
 					Intent intent = new Intent();
-					intent.setClass(Login.this, SXX.class);
+					intent.setClass(Login.this, Homepage.class);
 				
 					Login.this.startActivity(intent);
 					

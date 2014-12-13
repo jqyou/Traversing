@@ -58,23 +58,13 @@
         android:text="@string/lastrank" />
 
     <Button
-        android:id="@+id/button_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="28dp"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="@string/exitbutton"
-        android:textSize="15sp" />
-
-    <Button
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_exit"
-        android:layout_alignBottom="@+id/button_exit"
-        android:layout_toRightOf="@+id/button_master"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@+id/textView2"
         android:text="@string/backbutton"
         android:textSize="15sp" />
 
