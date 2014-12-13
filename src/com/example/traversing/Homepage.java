@@ -5,7 +5,10 @@ import java.util.Hashtable;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -126,7 +129,7 @@ public class Homepage extends Activity {
 			@Override
 			public void onClick(View v) {
 			
-				MyApplication.getInstance().exit();
+				Homepage.this.exitDialog();
 			}
 
 		});
@@ -149,6 +152,25 @@ public class Homepage extends Activity {
 		
 
 
+	}
+
+	// 退出的方法
+	public void exitDialog() {
+		Dialog dialog = new AlertDialog.Builder(Homepage.this)
+				.setTitle("Exit？").setMessage("Are You Sure to Exit?")
+				.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// 确定的话就表示退出，此时我们结束我们程序
+						// 使用我们Activity提供的finish方法
+						MyApplication.getInstance().exit();
+					//	Homepage.this.finish();// 操作结束
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+					}
+				}).create();
+		dialog.show();
 	}
 	
 
