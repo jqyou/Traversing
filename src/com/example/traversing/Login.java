@@ -29,7 +29,7 @@ public class Login extends Activity {
 	private String username;
 	private String userpwd;
 	private JSONArray record;
-//	private Storage storage;
+	private NameStore usernamestore;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -85,19 +85,24 @@ public class Login extends Activity {
 				record = new JSONArray(result);
 				username = record.getJSONObject(0).getString("UserName");
 				userpwd = record.getJSONObject(0).getString("UserPwd");
+				usernamestore = (NameStore) getApplication();
+				usernamestore.setText(username);
 				if (username.equals("empty")) {
 					Toast.makeText(getApplicationContext(),
 							"UserName or Password is not Right!",
 							Toast.LENGTH_SHORT).show();
 
 				} else {
-					Intent intent = new Intent();
-					intent.setClass(Login.this, SXX.class);
-					Login.this.startActivity(intent);
-				//	storage = (Storage) getApplication();
-				//	storage.set_user_name(username);
 					Toast.makeText(getApplicationContext(), "Login success!",
 							Toast.LENGTH_SHORT).show();
+					
+					Intent intent = new Intent();
+					intent.setClass(Login.this, SXX.class);
+				
+					Login.this.startActivity(intent);
+					
+					
+					
 
 				}
 			} catch (JSONException e) {
