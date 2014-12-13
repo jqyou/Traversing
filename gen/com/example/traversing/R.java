@@ -1069,10 +1069,11 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int beijingtu=0x7f020057;
-        public static final int ic_launcher=0x7f020058;
-        public static final int icon=0x7f020059;
-        public static final int icon2=0x7f02005a;
-        public static final int icon_app=0x7f02005b;
+        public static final int flybird=0x7f020058;
+        public static final int ic_launcher=0x7f020059;
+        public static final int icon=0x7f02005a;
+        public static final int icon2=0x7f02005b;
+        public static final int icon_app=0x7f02005c;
     }
     public static final class id {
         public static final int Spinner01=0x7f05005b;
@@ -1095,6 +1096,7 @@ containing a value of this type.
         public static final int button1=0x7f05004c;
         public static final int button2=0x7f05004f;
         public static final int button_assess=0x7f050040;
+        public static final int button_back=0x7f050071;
         public static final int button_exit=0x7f050070;
         public static final int button_login=0x7f050041;
         public static final int button_master=0x7f05006d;
@@ -1102,16 +1104,16 @@ containing a value of this type.
         public static final int button_rank=0x7f05006f;
         public static final int button_register=0x7f050042;
         public static final int button_return=0x7f050046;
-        public static final int button_search=0x7f050077;
+        public static final int button_search=0x7f050078;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int content_country=0x7f050072;
+        public static final int content_country=0x7f050073;
         public static final int content_gpa=0x7f050051;
         public static final int content_gre=0x7f050057;
         public static final int content_ielts=0x7f050055;
-        public static final int content_major=0x7f050076;
+        public static final int content_major=0x7f050077;
         public static final int content_toefl=0x7f050053;
-        public static final int content_type=0x7f050074;
+        public static final int content_type=0x7f050075;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
@@ -1184,13 +1186,13 @@ containing a value of this type.
         public static final int textViewpass=0x7f05006c;
         public static final int text_major=0x7f050044;
         public static final int title=0x7f05002b;
-        public static final int title_country=0x7f050071;
+        public static final int title_country=0x7f050072;
         public static final int title_gpa=0x7f050050;
         public static final int title_gre=0x7f050056;
         public static final int title_ielts=0x7f050054;
-        public static final int title_major=0x7f050075;
+        public static final int title_major=0x7f050076;
         public static final int title_toefl=0x7f050052;
-        public static final int title_type=0x7f050073;
+        public static final int title_type=0x7f050074;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
@@ -1310,6 +1312,7 @@ containing a value of this type.
         public static final int airport=0x7f0a0034;
         public static final int app_name=0x7f0a000d;
         public static final int assessbutton=0x7f0a0042;
+        public static final int backbutton=0x7f0a004d;
         public static final int bus=0x7f0a0036;
         public static final int climate=0x7f0a0038;
         public static final int district=0x7f0a0031;

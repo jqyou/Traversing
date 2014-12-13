@@ -66,6 +66,18 @@ public class SXX extends Activity{
 			}
 
 		});
+		
+		Button button5 = (Button) findViewById(R.id.button_back);
+		button5.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(SXX.this, Homepage.class);
+				SXX.this.startActivity(intent);
+			}
+
+		});
 	}
 
 }

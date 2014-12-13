@@ -71,5 +71,6 @@
     <string name="exitbutton">Exit  </string>
     <string name="rankbutton">Rank</string>
     <string name="moreinformationbutton">More information</string>
+      <string name="backbutton">Back  </string>
 
 </resources>
