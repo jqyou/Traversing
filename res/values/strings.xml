@@ -73,5 +73,6 @@
     <string name="rankbutton">Rank</string>
     <string name="moreinformationbutton">More information</string>
       <string name="backbutton">Back  </string>
+      <string name="aboutus"> Our goal of this app is to provide aspects such as the expense, safety, employment, climate, location, traffic, the research field when choosing schools. </string>
 
 </resources>

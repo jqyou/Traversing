@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.example.traversing.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,9 +13,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -30,6 +33,12 @@ public class Homepage extends Activity {
 	
 	private NameStore usernamestore;//设置全局变量来查看是否有用户登陆
 	private String username;
+
+	//定义Menu菜单选项的ItemId  
+    final static int ONE = Menu.FIRST;  
+    final static int TWO = Menu.FIRST+1;  
+    final static int THREE = Menu.FIRST+2;  
+
 
 	// private SimpleAdapter adapter;
 	private List<Hashtable<String, Object>> data;
@@ -130,6 +139,7 @@ public class Homepage extends Activity {
 			public void onClick(View v) {
 			
 				Homepage.this.exitDialog();
+			
 			}
 
 		});
@@ -145,19 +155,45 @@ public class Homepage extends Activity {
 			result_list.setAdapter(adapter);
 			result_list.setOnItemClickListener(listener);
 			
+		
+			
+}
 	
-		
-		
 	
-		
+	    public boolean onCreateOptionsMenu(Menu menu) {
+	        // Inflate the menu; this adds items to the action bar if it is present.
+	      //  getMenuInflater().inflate(R.menu.main, menu);
+	    	menu.add(0, ONE, 0, "Home Page");
+	        menu.add(0, TWO, 1, "About Us");  
+	        menu.add(0, THREE, 2, "Exit");  
+	        return super.onCreateOptionsMenu(menu); 
+	    
+	    }
 
-
-	}
-
-	// 退出的方法
+	    
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        // Handle action bar item clicks here. The action bar will
+	        // automatically handle clicks on the Home/Up button, so long
+	        // as you specify a parent activity in AndroidManifest.xml.
+	    	 switch(item.getItemId()){  
+	         case 1:  
+	              
+	             break;  
+	         case 2:  
+	        	 Intent aboutus = new Intent(Homepage.this,
+							AboutUs.class);
+					Homepage.this.startActivity(aboutus); 
+	             break;  
+	         case 3:  
+	        	 Homepage.this.exitDialog(); 
+	             break;
+	         }  
+	        return super.onOptionsItemSelected(item);
+	    }
+	    
 	public void exitDialog() {
 		Dialog dialog = new AlertDialog.Builder(Homepage.this)
-				.setTitle("Exit？").setMessage("Are You Sure to Exit?")
+				.setTitle("Leave?").setMessage("Are You Sure to Exit?")
 				.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						// 确定的话就表示退出，此时我们结束我们程序
