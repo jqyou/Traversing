@@ -73,6 +73,11 @@
             android:name="com.example.traversing.LastRank"
             android:label="@string/app_name" >
         </activity>
+        
+        <activity
+            android:name="com.example.traversing.NewContent"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

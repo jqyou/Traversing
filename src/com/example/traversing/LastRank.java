@@ -54,7 +54,7 @@ public class LastRank extends Activity {
 
 			if (universityname.equals("empty")) {
 				Toast.makeText(getApplicationContext(),
-						"You have not made assess before!",
+						"You have not made assess before,Or you do not have university to match",
 						Toast.LENGTH_SHORT).show();
 
 			}

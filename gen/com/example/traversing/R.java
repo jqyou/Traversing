@@ -1252,12 +1252,13 @@ containing a value of this type.
         public static final int listitem_name=0x7f03001f;
         public static final int login=0x7f030020;
         public static final int masterrank=0x7f030021;
-        public static final int rankfinally=0x7f030022;
-        public static final int rankvisitor=0x7f030023;
-        public static final int register=0x7f030024;
-        public static final int sunxiaoxuan=0x7f030025;
-        public static final int support_simple_spinner_dropdown_item=0x7f030026;
-        public static final int visitorassess=0x7f030027;
+        public static final int newcontent=0x7f030022;
+        public static final int rankfinally=0x7f030023;
+        public static final int rankvisitor=0x7f030024;
+        public static final int register=0x7f030025;
+        public static final int sunxiaoxuan=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
+        public static final int visitorassess=0x7f030028;
     }
     public static final class string {
         public static final int Hot=0x7f0a0013;
