@@ -1,16 +1,31 @@
 package com.example.traversing;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class SXX extends Activity{
@@ -19,6 +34,9 @@ public class SXX extends Activity{
     final static int ONE = Menu.FIRST;  
     final static int TWO = Menu.FIRST+1;  
     final static int THREE = Menu.FIRST+2;  
+    private String URL_PATH = "http://1.traversingoceans.sinaapp.com/index.php/api/lastrank/lr";
+    private String URL_PATH_NEW;
+    public final static String EXTRA_MESSAGE = "com.example.traversing.MESSAGE";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +59,7 @@ public class SXX extends Activity{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(SXX.this, RankUser.class);
+				intent.setClass(SXX.this, Masterrank.class);
 				SXX.this.startActivity(intent);
 			}
 
@@ -64,9 +82,15 @@ public class SXX extends Activity{
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(SXX.this, RankUser.class);
-				SXX.this.startActivity(intent);
+				/*Intent intent = new Intent();
+				intent.setClass(SXX.this, LastRank.class);
+				SXX.this.startActivity(intent);*/
+				/*EditText UserName = (EditText) findViewById(R.id.editText2);
+				username = UserName.getText().toString();
+				EditText UserPwd = (EditText) findViewById(R.id.editText1);
+				userpwd = UserPwd.getText().toString();*/
+				URL_PATH_NEW = URL_PATH + "/" + usernamestore.getText() ;
+				new UploadWebpageTask().execute(URL_PATH_NEW);
 			}
 
 		});
@@ -144,6 +168,84 @@ public class SXX extends Activity{
 					}
 				}).create();
 		dialog.show();
+	}
+	
+	private class UploadWebpageTask extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... urls) {
+			try {
+				return downloadUrl(URL_PATH_NEW);//ʹ�������downloadurl�������ص�string
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "URL maybe invalid";
+			}
+		}
+
+		// onPostExecute displays the results of the AsyncTask. ���ص����߳�
+		@Override
+		protected void onPostExecute(String result) {//��һ���������ص�string  json
+			Intent rank_name = new Intent(SXX.this, LastRank.class);
+			rank_name.putExtra(EXTRA_MESSAGE, result);//ʵ��activity֮�����Ϣ���� char����
+			SXX.this.startActivity(rank_name);
+		}
+	}
+
+	private String downloadUrl(String myurl) throws IOException {//����һ��downurl����
+		InputStream is = null;//����input
+
+		int len = 5000;
+
+		try {
+			URL url = new URL(myurl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setConnectTimeout(10000);
+			conn.setReadTimeout(10000);
+			conn.setUseCaches(false);
+			conn.setInstanceFollowRedirects(true);
+			conn.setRequestProperty("charset", "utf-8");
+			conn.setRequestProperty("Content-Type",
+					"application/x-www-form-urlencoded");//���ò���
+
+			conn.connect();
+
+			DataOutputStream out = new DataOutputStream(conn.getOutputStream());//out ������ data��output������
+
+			JSONObject content = new JSONObject();
+
+			try {
+				content.put("UserName",usernamestore.getText());
+			
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			out.write(content.toString().getBytes());// ת��string ���ֽ�������
+			out.flush();//�������Ƴ�
+			out.close();
+
+			is = conn.getInputStream();
+			String contentAsString = readIt(is, len);
+			conn.disconnect();
+			return contentAsString;
+
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+
+	}
+
+	public String readIt(InputStream stream, int len) throws IOException,//�������Ļ�����
+			UnsupportedEncodingException {
+		Reader reader = null;
+		reader = new InputStreamReader(stream, "UTF-8");
+		char[] buffer = new char[len];//ת����string
+		reader.read(buffer);
+		return new String(buffer);
 	}
 
 }
