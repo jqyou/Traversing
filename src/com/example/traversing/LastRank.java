@@ -1,7 +1,12 @@
 package com.example.traversing;
 
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,8 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LastRank extends Activity {
 	private NameStore usernamestore;
@@ -24,6 +31,10 @@ public class LastRank extends Activity {
     final static int TWO = Menu.FIRST+1;  
     final static int THREE = Menu.FIRST+2; 
     
+
+	private SimpleAdapter adapter;
+	private JSONArray rank;
+	private String universityname;
    
     
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +45,31 @@ public class LastRank extends Activity {
 		TextView user_name = (TextView) findViewById(R.id.textView1);
 		user_name.setText(usernamestore.getText());
 		
+		Intent intent = getIntent();
+		String result = intent.getStringExtra(SXX.EXTRA_MESSAGE);//������string
+		
+		try {
+			rank = new JSONArray(result);
+			universityname = rank.getJSONObject(0).getString("name");
 
+			if (universityname.equals("empty")) {
+				Toast.makeText(getApplicationContext(),
+						"You have not made assess before!",
+						Toast.LENGTH_SHORT).show();
+
+			}
+			else{
+			adapter = new SimpleAdapter(LastRank.this,getData(),
+					R.layout.listitem_name, new String[] { "name" },
+					new int[] { R.id.names });
+			ListView result_list = (ListView) findViewById(R.id.list_name);
+			result_list.setAdapter(adapter);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	
 		Button button1 = (Button) findViewById(R.id.button_return);
 		button1.setOnClickListener(new OnClickListener() {
 
@@ -97,6 +132,21 @@ public class LastRank extends Activity {
 					}
 				}).create();
 		dialog.show();
+	}
+	
+	private List<Hashtable<String, Object>> getData() {
+		List<Hashtable<String, Object>> list = new ArrayList<Hashtable<String, Object>>();
+		for (int i = 0; i < rank.length(); i++) {
+			Hashtable<String, Object> table = new Hashtable<String, Object>();
+            
+			try {
+				table.put("name", rank.getJSONObject(i).getString("name"));//��һ��name��listview�е�key��value�ṹ �ڶ���name��jsonobject�е�name
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			list.add(table);
+		}
+		return list;
 	}
 }
 

@@ -184,9 +184,9 @@ public class SXX extends Activity{
 		// onPostExecute displays the results of the AsyncTask. ���ص����߳�
 		@Override
 		protected void onPostExecute(String result) {//��һ���������ص�string  json
-			Intent rank_name = new Intent(SXX.this, LastRank.class);
-			rank_name.putExtra(EXTRA_MESSAGE, result);//ʵ��activity֮�����Ϣ���� char����
-			SXX.this.startActivity(rank_name);
+			Intent lastrank = new Intent(SXX.this, LastRank.class);
+			lastrank.putExtra(EXTRA_MESSAGE, result);//ʵ��activity֮�����Ϣ���� char����
+			SXX.this.startActivity(lastrank);
 		}
 	}
 
@@ -217,6 +217,7 @@ public class SXX extends Activity{
 
 			try {
 				content.put("UserName",usernamestore.getText());
+				
 			
 			} catch (JSONException e) {
 				e.printStackTrace();
