@@ -77,7 +77,7 @@ public class Masterrank extends Activity {
 	private String Airport = "y";
 	private String Train = "y";
 	private String Bus = "y";
-	private String AnnualRainfall = "middle";
+	private String AnnualRainfall = "rainfall";
 	private String LowTemperature = "15";
 	private String HighTemperature = "20";
 	private String username;
@@ -587,6 +587,7 @@ public class Masterrank extends Activity {
 				content.put("HIGHTEM", HighTemperature);
 				content.put("LOWTEM", LowTemperature);
 				content.put("UserName", username );
+		
 	
 			} catch (JSONException e) {
 				e.printStackTrace();

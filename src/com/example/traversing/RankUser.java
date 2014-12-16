@@ -63,14 +63,18 @@ public class RankUser extends Activity {
 		
 
 		try {
+			
 			rank = new JSONArray(result);
 			/*if(rank.getJSONObject(0).getString("Name").equals("empty")){*/
 											// json
+			
 			try {
 				if(rank.getJSONObject(0).getString("Name").equals("empty")){
 				Toast.makeText(getApplicationContext(),
-						"No Search Result",
-						Toast.LENGTH_SHORT).show();}
+						"hahahaha",
+						Toast.LENGTH_SHORT).show();
+				System.out.println("haha");}
+				
 				else{
 					ListView result_list = (ListView) findViewById(R.id.list_name);
 					data=getData();
