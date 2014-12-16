@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,67 +47,84 @@ import android.widget.Toast;
 public class Masterrank extends Activity {
 
 	private SimpleAdapter adapter;
-	private List<String> listOfSpinner = new ArrayList<String>();
+	private List<String> listOfSpinner;
+	private NameStore usernamestore;
 	private ArrayAdapter<String> adapterOfSpinner;
-	private String[] options = { "Expense: ", "Safety: ", "Employment: ",
-			"Terrain: ", "District: ", "Tourism: ", "Airport: ", "Train: ",
-			"Bus: ", "Annual Rainfall: ", "Low Temperature: ",
-			"High Temperature: ", };
+	private String[] options = { "Choose Expense: ", "Choose Safety: ",
+			"Choose Employment: ", "Choose Terrain: ", "Choose District: ",
+			"Choose Tourism: ", "Choose Airport: ", "Choose Train: ",
+			"Choose Bus: ", "Choose Annual Rainfall: ",
+			"Choose Low Temperature: ", "Choose High Temperature: ", };
 	private List<Hashtable<String, Object>> dataOfOptions;
-	
-	//定义Menu菜单选项的ItemId  
-    final static int ONE = Menu.FIRST;  
-    final static int TWO = Menu.FIRST+1;  
-    final static int THREE = Menu.FIRST+2;  
-    
+
+	final static int ONE = Menu.FIRST;
+	final static int TWO = Menu.FIRST + 1;
+	final static int THREE = Menu.FIRST + 2;
 
 	public final static String EXTRA_MESSAGE = "com.example.traversing.MESSAGE";
-	private String URL_PATH = "http://1.traversingoceans.sinaapp.com/index.php/api/user";
-	private String GPA;
-	private String TOEFL = "0";
-	private String IELTS = "0";
-	private String GRE = "0";
-	private String EXPENSE;
-	private String SAFETY;
-	private String EMPLOYMENT;
-	private String TERRAIN;
-	private String DISTRICT;
-	private String TOURISM;
-	private String AIRPORT;
-	private String TRAIN;
-	private String BUS;
-	private String RAINFALL;
-	private String LOWTEM;
-	private String HIGHTEM;
+	private String URL_PATH = "http://1.traversingoceans.sinaapp.com/index.php/api/master/index";
+
+	private String GPA,GPAstr;
+	private String TOEFL = "0",TOEFLstr;
+	private String IELTS = "0",IELTSstr;
+	private String GRE = "0",GREstr;
+	private String Expense = "50000";
+	private String Safety = "51";
+	private String Employment = "60.0";
+	private String Terrain = "plain";
+	private String District = "east";
+	private String Tourism = "y";
+	private String Airport = "y";
+	private String Train = "y";
+	private String Bus = "y";
+	private String AnnualRainfall = "middle";
+	private String LowTemperature = "15";
+	private String HighTemperature = "20";
+	private String username;
+	
+	private JSONArray record;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.masterrank);
 		MyApplication.getInstance().addActivity(this);
+		
 
 		// set OnClick for VisitorAssess
-		Button button1 = (Button) findViewById(R.id.button1);
-		button1.setOnClickListener(new OnClickListener() {
-
-			/*
-			 * @Override public void onClick(View v) { Intent visitor_assess =
-			 * new Intent(Masterrank.this, RankUser.class);
-			 * Masterrank.this.startActivity(visitor_assess); }
-			 */
+		Button assess = (Button) findViewById(R.id.button1);
+		assess.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				usernamestore = (NameStore) getApplication();
+			    username=usernamestore.getText();
+			    
 				EditText gpa = (EditText) findViewById(R.id.content_gpa);
 				GPA = gpa.getText().toString();
+				GPAstr=gpa.getText().toString().trim();
 				EditText toefl = (EditText) findViewById(R.id.content_toefl);
 				TOEFL = toefl.getText().toString();
+				TOEFLstr=toefl.getText().toString().trim();
 				EditText ielts = (EditText) findViewById(R.id.content_ielts);
 				IELTS = ielts.getText().toString();
+				IELTSstr=ielts.getText().toString();
 				EditText gre = (EditText) findViewById(R.id.content_gre);
 				GRE = gre.getText().toString();
-				
+				GREstr=gre.getText().toString().trim();
+				if(GPAstr == null || GPAstr == ""
+						|| GPAstr.length() == 0 || TOEFLstr == null
+						|| TOEFLstr == "" || TOEFLstr.length() == 0
+						||IELTSstr == null || IELTSstr == ""
+						|| IELTSstr.length() == 0 || GREstr == null
+						|| GREstr == "" || GREstr.length() == 0)
+				{
+					Toast.makeText(Masterrank.this,
+							"Please insert all scores of GPA,TOEFL,IELTS,GRE",
+							Toast.LENGTH_LONG).show();
+				}
+				else{
 
-				new UploadWebpageTask().execute(URL_PATH);
+				new UploadWebpageTask().execute(URL_PATH);}
 			}
 
 		});
@@ -113,7 +132,8 @@ public class Masterrank extends Activity {
 		// Listview
 		dataOfOptions = getData();
 		ListView result_list = (ListView) findViewById(R.id.listView1);
-		MyAdapterOfOptions adapterOfOptions = new MyAdapterOfOptions(Masterrank.this);
+		MyAdapterOfOptions adapterOfOptions = new MyAdapterOfOptions(
+				Masterrank.this);
 		result_list.setAdapter(adapterOfOptions);
 		result_list.setOnItemClickListener(listener);
 
@@ -131,7 +151,7 @@ public class Masterrank extends Activity {
 		}
 	};
 
-	//
+	// ≤˙…˙°∂°∑Ω·ππ
 	private List<Hashtable<String, Object>> getData() {
 		List<Hashtable<String, Object>> list = new ArrayList<Hashtable<String, Object>>();
 		for (int i = 0; i < options.length; i++) {
@@ -142,9 +162,7 @@ public class Masterrank extends Activity {
 		}
 		return list;
 	}
-	
-	ViewHolder hello=new ViewHolder();
-	
+
 	// implement button's click event
 	public final class ViewHolder {
 		public TextView options;
@@ -186,6 +204,7 @@ public class Masterrank extends Activity {
 						.findViewById(R.id.options);
 				holder.spinner = (Spinner) convertView
 						.findViewById(R.id.spinner);
+				
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -200,9 +219,9 @@ public class Masterrank extends Activity {
 			adapterOfSpinner
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			holder.spinner.setAdapter(adapterOfSpinner);
+			holder.spinner.setTag(position);
 			holder.spinner.setSelection(0, true);
 			holder.spinner.setOnItemSelectedListener(listenerOfSpinner);
-
 			return convertView;
 		}
 	}
@@ -213,154 +232,290 @@ public class Masterrank extends Activity {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
-			
-			/*EXPENSE = holder.spinner.getSelectedItem().toString();
-			SAFETY = spinner.getSelectedItem().toString();
-			EMPLOYMENT = spinner.getSelectedItem().toString();
-			TERRAIN = spinner.getSelectedItem().toString();
-			DISTRICT = spinner.listOfSpinner().getSelectedItem().toString();
-			TOURISM = spinner.listOfSpinner().getSelectedItem().toString();
-			AIRPORT = spinner.listOfSpinner().getSelectedItem().toString();
-			TRAIN = spinner.listOfSpinner().getSelectedItem().toString();
-			BUS = spinner.listOfSpinner.getSelectedItem().toString();
-			RAINFALL = spinner.listOfSpinner.getSelectedItem().toString();
-			LOWTEM = spinner.listOfSpinner.getSelectedItem().toString();
-			HIGHTEM = spinner.getSelectedItem().toString();*/
-			// Toast.makeText(Masterrank.this,"You select "+listOfSpinner.get(position),
-			// Toast.LENGTH_SHORT).show();
+			AssignValue(parent.getItemAtPosition(0).toString(), parent
+					.getItemAtPosition(position).toString());
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
-			// Toast.makeText(Masterrank.this,"You don't select anything!",
-			// Toast.LENGTH_SHORT).show();
-		}
-		
-	};
-	
-	
-	 public boolean onCreateOptionsMenu(Menu menu) {
-	        // Inflate the menu; this adds items to the action bar if it is present.
-	      //  getMenuInflater().inflate(R.menu.main, menu);
-	    	menu.add(0, ONE, 0, "Home Page");
-	        menu.add(0, TWO, 1, "About Us");  
-	        menu.add(0, THREE, 2, "Exit");  
-	        return super.onCreateOptionsMenu(menu); 
-	    
-	    }
 
-	    
-	    public boolean onOptionsItemSelected(MenuItem item) {
-	        // Handle action bar item clicks here. The action bar will
-	        // automatically handle clicks on the Home/Up button, so long
-	        // as you specify a parent activity in AndroidManifest.xml.
-	    	 switch(item.getItemId()){  
-	         case 1:  
-	        	 Intent homepage = new Intent(Masterrank.this,
-							Homepage.class);
-					Masterrank.this.startActivity(homepage); 
-	             break;  
-	         case 2:  
-	        	 Intent aboutus = new Intent(Masterrank.this,
-							AboutUs.class);
-					Masterrank.this.startActivity(aboutus); 
-	             break;  
-	         case 3:  
-	        	 Masterrank.this.exitDialog(); 
-	             break;
-	         }  
-	        return super.onOptionsItemSelected(item);
-	    }
-	    
+			AssignValue(parent.getItemAtPosition(0).toString(), parent
+					.getItemAtPosition(0).toString());
+		}
+	};
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(0, ONE, 0, "Home Page");
+		menu.add(0, TWO, 1, "About Us");
+		menu.add(0, THREE, 2, "Exit");
+		return super.onCreateOptionsMenu(menu);
+
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		switch (item.getItemId()) {
+		case 1:
+			Intent homepage = new Intent(Masterrank.this, Homepage.class);
+			Masterrank.this.startActivity(homepage);
+			break;
+		case 2:
+			Intent aboutus = new Intent(Masterrank.this, AboutUs.class);
+			Masterrank.this.startActivity(aboutus);
+			break;
+		case 3:
+			Masterrank.this.exitDialog();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	public void exitDialog() {
 		Dialog dialog = new AlertDialog.Builder(Masterrank.this)
-				.setTitle("Leave?").setMessage("Are You Sure to Exit?")
-				.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						// 确定的话就表示退出，此时我们结束我们程序
-						// 使用我们Activity提供的finish方法
-						MyApplication.getInstance().exit();
-					//	Homepage.this.finish();// 操作结束
-					}
-				})
-				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				}).create();
+				.setTitle("Leave?")
+				.setMessage("Are You Sure to Exit?")
+				.setPositiveButton("Sure",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+
+								MyApplication.getInstance().exit();
+								// Homepage.this.finish();
+							}
+						})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+							}
+						}).create();
 		dialog.show();
 	}
 
-	// the button options
+	// spinner
 	public List<String> getlistOfSpinner(int position) {
 		listOfSpinner = new ArrayList<String>();
 		switch (position) {
 		case 0:
-			listOfSpinner.add("<20000");
-			listOfSpinner.add("20000-40000");
-			listOfSpinner.add(">40000");
+			listOfSpinner.add("Expense:");
+			listOfSpinner.add("<25000");
+			listOfSpinner.add("<35000");
+			listOfSpinner.add("<50000");
 			return listOfSpinner;
 
 		case 1:
+			listOfSpinner.add("Safety:");
 			listOfSpinner.add("<15");
-			listOfSpinner.add("15-30");
-			listOfSpinner.add("31-51");
+			listOfSpinner.add("<35");
+			listOfSpinner.add("<51");
 			return listOfSpinner;
 
 		case 2:
-			listOfSpinner.add(">85%");
-			listOfSpinner.add(">80%");
-			listOfSpinner.add(">70%");
-			listOfSpinner.add(">60%");
+			listOfSpinner.add("Employment:");
+			listOfSpinner.add(">85");
+			listOfSpinner.add(">80");
+			listOfSpinner.add(">70");
+			listOfSpinner.add(">60");
 			return listOfSpinner;
 
 		case 3:
+			listOfSpinner.add("Terrain:");
 			listOfSpinner.add("Plain");
 			listOfSpinner.add("Mountain");
 			return listOfSpinner;
 
 		case 4:
+			listOfSpinner.add("District:");
 			listOfSpinner.add("East");
 			listOfSpinner.add("West");
 			listOfSpinner.add("North");
 			listOfSpinner.add("South");
+			listOfSpinner.add("Middle");
 			return listOfSpinner;
 
 		case 5:
+			listOfSpinner.add("Tourism:");
 			listOfSpinner.add("Yes");
 			listOfSpinner.add("No");
 			return listOfSpinner;
 
 		case 6:
+			listOfSpinner.add("Airport:");
 			listOfSpinner.add("Yes");
 			listOfSpinner.add("No");
 			return listOfSpinner;
 
 		case 7:
+			listOfSpinner.add("Train:");
 			listOfSpinner.add("Yes");
 			listOfSpinner.add("No");
 			return listOfSpinner;
 
 		case 8:
+			listOfSpinner.add("Bus:");
+			listOfSpinner.add("Yes");
+			listOfSpinner.add("No");
+			return listOfSpinner;
+
+		case 9:
+			listOfSpinner.add("Annual Rainfall:");
 			listOfSpinner.add("Middle");
 			listOfSpinner.add("Low");
 			listOfSpinner.add("High");
 			listOfSpinner.add("VHigh");
 			return listOfSpinner;
 
-		case 9:
-			listOfSpinner.add(">5");
-			listOfSpinner.add("Minus5-5");
-			listOfSpinner.add("<Minus5");
+		case 10:
+			listOfSpinner.add("Low Temperature:");
+			listOfSpinner.add("<15");
+			listOfSpinner.add("<5");
+			listOfSpinner.add("<0");
 			return listOfSpinner;
 
-		case 10:
-			listOfSpinner.add("<25");
-			listOfSpinner.add("25-30");
+		case 11:
+			listOfSpinner.add("High Temperature:");
+			listOfSpinner.add(">20");
+			listOfSpinner.add(">25");
 			listOfSpinner.add(">30");
 			return listOfSpinner;
 
 		default:
 			return null;
+		}
+	}
+
+	public void AssignValue(String option, String selection) {
+		if (option.equals("Expense:")) {
+			if (option.equals(selection)) {
+				Expense = "50000";
+			} else if(selection.equals("<25000")){
+				Expense = "25000";
+			} else if(selection.equals("<35000")){
+				Expense = "35000";
+			} else if(selection.equals("<50000")){
+				Expense = "50000";
+			} 
+			
+		}
+		else if (option.equals("Safety:")) {
+			if (option.equals(selection)) {
+				Safety = "51";
+			} else if(selection.equals("<15")){
+				Safety = "15";
+			} else if(selection.equals("<35")){
+				Safety = "35";
+			} else if(selection.equals("<51")){
+				Safety = "51";
+			}
+		} else if (option.equals("Employment:")) {
+			if (option.equals(selection)) {
+				Employment = "60.0";
+			} else if(selection.equals(">85")){
+				Employment = "85.0";
+			} else if(selection.equals(">80")){
+				Employment = "80.0";
+			} else if(selection.equals(">70")){
+				Employment = "70.0";
+			} else if(selection.equals(">60")){
+				Employment = "60.0";
+			}
+		} else if (option.equals("Terrain:")) {
+			if (option.equals(selection)) {
+				Terrain = "plain";
+			} else if(selection.equals("Plain")){
+				Terrain = "plain";
+			} else if(selection.equals("Mountain")){
+				Terrain = "mountain";
+			}
+			
+		} else if (option.equals("District:")) {
+			if (option.equals(selection)) {
+				District = "east";
+			} else if (selection.equals("East")){
+					District = "east";
+			} else if (selection.equals("West")){
+				District = "west";
+			} else if (selection.equals("North")){
+				District = "north";
+			} else if (selection.equals("South")){
+				District = "south";
+			} else if (selection.equals("Middle")){
+				District = "middle";
+			} else {
+				District = "east";
+			}
+			
+		} else if (option.equals("Tourism:")) {
+			if (option.equals(selection)) {
+				Tourism = "y";
+			} else if(selection.equals("Yes")){
+				Tourism = "y";
+			} else if(selection.equals("No")){
+				Tourism = "n";
+			} 
+			
+		} else if (option.equals("Airport:")) {
+			if (option.equals(selection)) {
+				Airport = "y";
+			} else if(selection.equals("Yes")){
+				Airport = "y";
+			} else if(selection.equals("No")){
+				Airport = "n";
+			} 
+		} else if (option.equals("Train:")) {
+			if (option.equals(selection)) {
+				Train = "y";
+			} else if(selection.equals("Yes")){
+				Train = "y";
+			} else if(selection.equals("No")){
+				Train = "n";
+			} 
+			
+		} else if (option.equals("Bus:")) {
+			if (option.equals(selection)) {
+				Bus = "y";
+			} else if(selection.equals("Yes")){
+				Bus = "y";
+			} else if(selection.equals("No")){
+				Bus = "n";
+			} 
+		} else if (option.equals("Annual Rainfall:")) {
+			if (option.equals(selection)) {
+				AnnualRainfall = "middle";
+			} else if (selection.equals("Middle")){
+				AnnualRainfall = "middle";
+			} else if (selection.equals("High")){
+				AnnualRainfall = "high";
+			} else if (selection.equals("VHigh")){
+				AnnualRainfall = "vhigh";
+			} else if (selection.equals("Low")){
+				AnnualRainfall = "low";
+			} 
+		} else if (option.equals("Low Temperature:")) {
+			if (option.equals(selection)) {
+				LowTemperature = "15";
+			} else if (selection.equals("<15")){
+				LowTemperature = "15";
+			} else if (selection.equals("<5")){
+				LowTemperature = "5";
+			} else if (selection.equals("<0")){
+				LowTemperature = "0";
+			} 
+		} else if (option.equals("High Temperature:")) {
+			if (option.equals(selection)) {
+				HighTemperature = "20";
+			} else if (selection.equals(">20")){
+				HighTemperature = "20";
+			} else if (selection.equals(">25")){
+				HighTemperature = "25";
+			} else if (selection.equals(">30")){
+				HighTemperature = "30";
+			} 
+			Log.i("TAG", HighTemperature);
 		}
 	}
 
@@ -378,10 +533,11 @@ public class Masterrank extends Activity {
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {// string
-														// json
+			
 			Intent rank_name = new Intent(Masterrank.this, RankUser.class);
 			rank_name.putExtra(EXTRA_MESSAGE, result);// ʵ��activity
 														// char����
+			
 			Masterrank.this.startActivity(rank_name);
 		}
 	}
@@ -403,13 +559,13 @@ public class Masterrank extends Activity {
 			conn.setInstanceFollowRedirects(true);
 			conn.setRequestProperty("charset", "utf-8");
 			conn.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");// 
+					"application/x-www-form-urlencoded");//
 
 			conn.connect();
 
 			DataOutputStream out = new DataOutputStream(conn.getOutputStream());// out
-																				
-																				// data input
+
+			// data input
 
 			JSONObject content = new JSONObject();
 
@@ -418,24 +574,25 @@ public class Masterrank extends Activity {
 				content.put("TOEFL", TOEFL);
 				content.put("IELTS", IELTS);
 				content.put("GRE", GRE);
-				content.put("EXPENSE", EXPENSE);
-				content.put("SAFETY", SAFETY);
-				content.put("EMPLOYMENT", EMPLOYMENT);
-				content.put("TERRAIN", TERRAIN);
-				content.put("DISTRICT", DISTRICT);
-				content.put("TOURISM", TOURISM);
-				content.put("AIRPORT", AIRPORT);
-				content.put("TRAIN", TRAIN);
-				content.put("BUS", BUS);
-				content.put("RAINFALL", RAINFALL);
-				content.put("HIGHTEM", HIGHTEM);
-				content.put("LOWTEM", LOWTEM);
+				content.put("EXPENSE", Expense); 
+				content.put("SAFETY",Safety); 
+				content.put("EMPLOYMENT", Employment);
+				content.put("TERRAIN", Terrain); 
+				content.put("DISTRICT",District); 
+				content.put("TOURISM", Tourism);
+				content.put("AIRPORT", Airport); 
+				content.put("TRAIN", Train);
+				content.put("BUS", Bus); 
+				content.put("RAINFALL",AnnualRainfall);
+				content.put("HIGHTEM", HighTemperature);
+				content.put("LOWTEM", LowTemperature);
+				content.put("UserName", username );
+	
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
 			out.write(content.toString().getBytes());// string
-														
 			out.flush();
 			out.close();
 
@@ -452,11 +609,11 @@ public class Masterrank extends Activity {
 
 	}
 
-	public String readIt(InputStream stream, int len) throws IOException,// 
+	public String readIt(InputStream stream, int len) throws IOException,//
 			UnsupportedEncodingException {
 		Reader reader = null;
 		reader = new InputStreamReader(stream, "UTF-8");
-		char[] buffer = new char[len];//string
+		char[] buffer = new char[len];// string
 		reader.read(buffer);
 		return new String(buffer);
 	}

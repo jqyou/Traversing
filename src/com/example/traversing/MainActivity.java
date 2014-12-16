@@ -4,6 +4,10 @@ package com.example.traversing;
 
 
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +24,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		MyApplication.getInstance().addActivity(this);
+		//PushManager.startWork(getApplicationContext(),PushConstants.LOGIN_TYPE_API_KEY, "8i2DTPU9DoE1KXKdyVMkmsb3");
+		   PushManager.startWork(getApplicationContext(),
+	                PushConstants.LOGIN_TYPE_API_KEY,
+	                Utils.getMetaValue(MainActivity.this, "api_key"));
 
 	
 

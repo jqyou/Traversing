@@ -12,6 +12,7 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,18 +28,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Visitorassess extends Activity {
 	
 	public final static String EXTRA_MESSAGE = "com.example.traversing.MESSAGE";
 	private String URL_PATH = "http://1.traversingoceans.sinaapp.com/index.php/api/visitor";
-	private String GPA;
-	private String TOEFL = "0";
-	private String IELTS = "0";
-	private String GRE = "0";
+	private String GPA,GPAstr;
+	private String TOEFL,TOEFLstr;
+	private String IELTS,IELTSstr;
+	private String GRE,GREstr;
 	private String country;
-	private String type;
-	private String majors;
+
 	
 	//定义Menu菜单选项的ItemId  
     final static int ONE = Menu.FIRST;  
@@ -61,9 +62,7 @@ public class Visitorassess extends Activity {
 		ArrayAdapter<String> adapter1, adapter2, adapter3;
 
 		spinner1 = (Spinner) findViewById(R.id.content_country);
-		spinner2 = (Spinner) findViewById(R.id.content_type);
-		spinner3 = (Spinner) findViewById(R.id.content_major);
-
+	
 		// ����ѡ������ArrayAdapter��������
 		adapter1 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, target);
@@ -79,13 +78,11 @@ public class Visitorassess extends Activity {
 
 		// ��adapter ��ӵ�spinner��
 		spinner1.setAdapter(adapter1);
-		spinner2.setAdapter(adapter2);
-		spinner3.setAdapter(adapter3);
+	
 
 		// ����Ĭ��ֵ
 		spinner1.setVisibility(View.VISIBLE);
-		spinner2.setVisibility(View.VISIBLE);
-		spinner3.setVisibility(View.VISIBLE);
+	
 
 		// set OnClick for return
 		Button button_return = (Button) findViewById(R.id.button_return);
@@ -106,20 +103,39 @@ public class Visitorassess extends Activity {
 			public void onClick(View v) {
 				EditText gpa = (EditText) findViewById(R.id.content_gpa);
 				GPA = gpa.getText().toString();
+				GPAstr=gpa.getText().toString().trim();
 				EditText toefl = (EditText) findViewById(R.id.content_toefl);
 				TOEFL = toefl.getText().toString();
+				TOEFLstr=toefl.getText().toString().trim();
 				EditText ielts = (EditText) findViewById(R.id.content_ielts);
 				IELTS = ielts.getText().toString();
-			
+				IELTSstr=ielts.getText().toString();
 				EditText gre = (EditText) findViewById(R.id.content_gre);
 				GRE = gre.getText().toString();
-			
+				GREstr=gre.getText().toString().trim();
+				
 				country = spinner1.getSelectedItem().toString();
-				type = spinner2.getSelectedItem().toString();
-				majors = spinner3.getSelectedItem().toString();
+				
+				if(GPAstr == null || GPAstr == ""
+						|| GPAstr.length() == 0 || TOEFLstr == null
+						|| TOEFLstr == "" || TOEFLstr.length() == 0
+						||IELTSstr == null || IELTSstr == ""
+						|| IELTSstr.length() == 0 || GREstr == null
+						|| GREstr == "" || GREstr.length() == 0)
+				{
+					Toast.makeText(Visitorassess.this,
+							"Please insert all scores of GPA,TOEFL,IELTS,GRE",
+							Toast.LENGTH_LONG).show();
+				}
+				else{
 
-				new UploadWebpageTask().execute(URL_PATH);
+				   new UploadWebpageTask().execute(URL_PATH);}
 			}
+			
+				
+			
+
+			
 		});
 	}
     //�¿���̨�߳�
@@ -174,8 +190,7 @@ public class Visitorassess extends Activity {
 				content.put("IELTS", IELTS);
 				content.put("GRE", GRE);
 				content.put("country", country);
-				content.put("type", type);
-				content.put("majors", majors);
+			
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

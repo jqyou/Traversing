@@ -55,6 +55,7 @@
         android:layout_alignBottom="@+id/title_toefl"
         android:layout_toRightOf="@+id/title_toefl"
         android:ems="10"
+        android:hint="No Toefl score.Input 0"
         android:inputType="number" />
 
     <TextView
@@ -75,6 +76,7 @@
         android:layout_alignBottom="@+id/title_ielts"
         android:layout_toRightOf="@+id/title_ielts"
         android:ems="10"
+        android:hint="No IELTS score.Input 0"
         android:inputType="numberDecimal" />
 
     <TextView
@@ -114,42 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/title_country"
         android:layout_toRightOf="@+id/title_country" />
-
-    <TextView
-        android:id="@+id/title_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_country"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/masterphd"
-        android:textColor="#000000"
-        android:textSize="23sp" />
-
-    <Spinner
-        android:id="@+id/content_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/title_type"
-        android:layout_toRightOf="@+id/title_type" />
-
-    <TextView
-        android:id="@+id/title_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_type"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/major"
-        android:textColor="#000000"
-        android:textSize="23sp" />
-
-    <Spinner
-        android:id="@+id/content_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/title_major"
-        android:layout_toRightOf="@+id/title_major" />
 
     <Button
         android:id="@+id/button_return"

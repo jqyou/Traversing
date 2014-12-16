@@ -93,7 +93,7 @@ public class Homepage extends Activity {
 		Button assess = (Button) findViewById(R.id.button_assess);
 		Button exit = (Button) findViewById(R.id.button_exit);
 		TextView user_name = (TextView) findViewById(R.id.textView1);
-	    if(username.equals("")){
+	    if(username.equals("")||username.equals("empty")){
 	    	
 			button1.setOnClickListener(new OnClickListener() {
 
@@ -284,8 +284,10 @@ public class Homepage extends Activity {
 	        // as you specify a parent activity in AndroidManifest.xml.
 	    	 switch(item.getItemId()){  
 	         case 1:  
-	              
-	             break;  
+	        	 Intent homepage = new Intent(Homepage.this,
+							Homepage.class);
+					Homepage.this.startActivity(homepage); 
+	             break;   
 	         case 2:  
 	        	 Intent aboutus = new Intent(Homepage.this,
 							AboutUs.class);

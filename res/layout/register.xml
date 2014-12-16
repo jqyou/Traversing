@@ -43,18 +43,8 @@
         android:layout_alignBottom="@+id/textViewgpa"
         android:layout_alignLeft="@+id/editTextemail"
         android:ems="10"
-        android:hint="@string/nameregisterinput"
+       
         android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextemail"
-        android:layout_below="@+id/editTextemail"
-        android:ems="10"
-        android:hint="@string/passwordregisterinput"
-        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/textViewmail"
@@ -67,28 +57,38 @@
         android:textColor="#000000"
         android:textSize="25sp" />
 
+    <TextView
+        android:id="@+id/textViewpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@string/passwordregister"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/editTextpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewpass"
+        android:layout_alignBottom="@+id/textViewpass"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+       
+        android:inputType="textPassword" />
+
     <EditText
         android:id="@+id/editTextemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/editText4"
-        android:layout_marginLeft="11dp"
+        android:layout_alignLeft="@+id/editTextpassword"
+        android:layout_alignTop="@+id/textViewmail"
         android:ems="10"
         android:hint="@string/emailregisterinput"
         android:inputType="textEmailAddress" >
 
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/textViewpass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editTextpassword"
-        android:layout_alignParentLeft="true"
-        android:text="@string/passwordregister"
-        android:textColor="#000000"
-        android:textSize="25sp" />
 
 </RelativeLayout>
