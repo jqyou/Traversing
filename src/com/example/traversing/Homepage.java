@@ -62,21 +62,6 @@ public class Homepage extends Activity {
 
 	// private SimpleAdapter adapter;
 	private List<Hashtable<String, Object>> data;
-	/*private String[] news = {
-			"1. USNews global university rankings.",
-			"2. USNews national university rankings.",
-			"3. QS university rankings in Asia.",
-			"4. Updated deadline of the application.",
-			"5. New entry requirements of HKUST.",
-			"6. Propaganda of USC and NYU in Peking University.",
-			"7. Professor in CMU talks about employment situation in CS field.",
-			"8. The safe city rankings in America.",
-			"9. Professor Chen Lei recruits exchange student major in Datamining between HKUST and UWaterloo.",
-			"10. Students in Beijing find friends to co-fly to Chicago on Sep,12th.",
-			"11. Successfully applying CV and PS shared by students in HKU.",
-			"12. The difference between Msc and Mphil of universities in British commonwealth countries.",
-			"13. The university rankings of highest employment rate in Law field.",
-			"14. Convene volunteers of the coming China Higher Education Exhibition in Shanghai." };*/
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
